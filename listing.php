@@ -3,7 +3,7 @@
 require_once __DIR__ . "/connection.php";
 
 $buscar_cadastro = "SELECT * FROM tb_cliente";
-$quero_cadastro = mysqli_query($connx, $buscar_cadastro);
+$query_cadastro = mysqli_query($connx, $buscar_cadastro);
 
 
 ?>
@@ -28,7 +28,7 @@ $quero_cadastro = mysqli_query($connx, $buscar_cadastro);
     <!-- place navbar here -->
     <div class="container">
         <div class="table-responsive">
-            <table class="table table-dark">
+            <table class="table table-light">
                 <thead>
                     <tr>
                         <th scope="col">id</th>
@@ -38,22 +38,37 @@ $quero_cadastro = mysqli_query($connx, $buscar_cadastro);
                     </tr>
                 </thead>
                 <tbody>
+
                     <?php
                       //mysqli_fetch_array pega a variável $quero_cadastro, que recebe a conexão e busca o cadastro.
-                      while($receber_cadastro = mysqli_fetch_array($quero_cadastro)) 
+                      while($receber_cadastro = mysqli_fetch_array($query_cadastro)) 
                             {
                                 $id = $receber_cadastro['id'];
                                 $name = $receber_cadastro['name'];
                                 $email = $receber_cadastro['email'];
                                 $phone = $receber_cadastro['phone'];
                         ?>
-                    <tr class="table table-info">
+                    <tr class="table table-light">
                         <td scope="row"><?php echo $id; ?></td>  
                         <td> <?php echo $name;?> </td>
                         <td> <?php echo $email;?> </td>
                         <td> <?php echo $phone;?> </td>
                     </tr>
+
                     <?php   }; ?> <!-- Fechamento do While -->
+                    
+                    <tr> 
+                        <form action="registration.php" method="POST"> 
+                        <td></td>    
+                        <td><input type="text" name="name"></td>
+                        <td><input type="email" name="email"></td>
+                        <td><input type="text" name="phone"></td>
+                        <td><input type="submit" value="cadastro"></td>
+                    </tr>
+                       
+                      </form>
+                   
+
                 </tbody>
             </table>
         </div>
