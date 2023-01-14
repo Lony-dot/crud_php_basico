@@ -53,6 +53,12 @@ $query_cadastro = mysqli_query($connx, $buscar_cadastro);
                         <td> <?php echo $name;?> </td>
                         <td> <?php echo $email;?> </td>
                         <td> <?php echo $phone;?> </td>
+                        <td>
+                        <form action="delete.php" method="POST">    
+                            <input type="text" name="id" value="<?php echo $id; ?>">
+                            <input type="submit" value="Excluir">
+                        </form>
+                        </td>
                     </tr>
 
                     <?php   }; ?> <!-- Fechamento do While -->
