@@ -1,3 +1,13 @@
+<?php
+//Requisição de banco de dados
+require_once __DIR__ . "/connection.php";
+
+$buscar_cadastro = "SELECT * FROM tb_cliente";
+$quero_cadastro = mysqli_query($connx, $buscar_cadastro);
+
+
+?>
+
 <!doctype html>
 <html lang="pt-BR">
 
@@ -16,31 +26,37 @@
 <body>
   <header>
     <!-- place navbar here -->
-     <div class="table-responsive">
-        <table class="table table-primary">
-            <thead>
-                <tr>
-                    <th scope="col">id</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Telefone</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="">
-                    <td scope="row">1</td>
-                    <td>Fred</td>
-                    <td>@1</td>
-                    <td>111</td>
-                </tr>
-                <tr class="">
-                    <td scope="row">2</td>
-                    <td>Lony</td>
-                    <td>@2</td>
-                    <td>222</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Telefone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                      //mysqli_fetch_array pega a variável $quero_cadastro, que recebe a conexão e busca o cadastro.
+                      while($receber_cadastro = mysqli_fetch_array($quero_cadastro)) 
+                            {
+                                $id = $receber_cadastro['id'];
+                                $name = $receber_cadastro['name'];
+                                $email = $receber_cadastro['email'];
+                                $phone = $receber_cadastro['phone'];
+                        ?>
+                    <tr class="table table-info">
+                        <td scope="row"><?php echo $id; ?></td>  
+                        <td> <?php echo $name;?> </td>
+                        <td> <?php echo $email;?> </td>
+                        <td> <?php echo $phone;?> </td>
+                    </tr>
+                    <?php   }; ?> <!-- Fechamento do While -->
+                </tbody>
+            </table>
+        </div>
     </div>
     
   </header>
