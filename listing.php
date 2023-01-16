@@ -32,7 +32,7 @@ $query_cadastro = mysqli_query($connx, $buscar_cadastro);
                 <thead>
                     <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Nome</th>
+                        <th scope="col">Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Telefone</th>
                     </tr>
@@ -49,15 +49,30 @@ $query_cadastro = mysqli_query($connx, $buscar_cadastro);
                                 $phone = $receber_cadastro['phone'];
                         ?>
                     <tr class="table table-light">
-                        <td scope="row"><?php echo $id; ?></td>  
-                        <td> <?php echo $name;?> </td>
-                        <td> <?php echo $email;?> </td>
-                        <td> <?php echo $phone;?> </td>
+                      <form>
+                        <td scope="row"> <?php echo $receber_cadastro['id'] ?></td>  
+                        <td> <input type="text" name="name" value="<?php echo $name; ?>"></td>
+                        <td> <input type="text" name="email" value="<?php echo $email; ?>"></td>
+                        <td> <input type="text" name="phone" value="<?php echo $phone; ?>"></td>
+
                         <td>
-                        <form action="delete.php" method="POST">    
-                            <input type="text" name="id" value="<?php echo $id; ?>">
-                            <input type="submit" value="Excluir">
-                        </form>
+
+                          <form action="edit.php" method="POST">  
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <input type="text" name="name" value="<?php echo $name; ?>">
+                            <input type="text" name="email" value="<?php echo $email; ?>">
+                            <input type="text" name="phone" value="<?php echo $phone; ?>">
+                            <td><input class="btn btn-warning" type="submit" value="Editar"></td>
+
+                          </form>
+
+                        </td>
+
+                        <td>
+                          <form action="delete.php" method="POST">    
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <td><input class="btn btn-danger" type="submit" value="excluir"></td>
+                          </form>
                         </td>
                     </tr>
 
@@ -69,10 +84,10 @@ $query_cadastro = mysqli_query($connx, $buscar_cadastro);
                         <td><input type="text" name="name"></td>
                         <td><input type="email" name="email"></td>
                         <td><input type="text" name="phone"></td>
-                        <td><input type="submit" value="cadastro"></td>
+                        <td><input type="submit" class="btn btn-primary" value="cadastro"></td>
                     </tr>
                        
-                      </form>
+                     </form>
                    
 
                 </tbody>
